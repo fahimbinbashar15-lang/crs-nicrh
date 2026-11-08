@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRS NICRH</title>
+<style>
+:root{--bg:#f3f6f8;--surface:#fff;--ink:#14232e;--muted:#5d6f7c;--line:#d5dee5;--accent:#0b5c8f;--accent-ink:#fff;--ok:#dff1e4;--mid:#fdf0cf;--hi:#f9d9d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e171d;--surface:#16232c;--ink:#e6eef3;--muted:#93a6b3;--line:#2b3d49;--accent:#5bb0e6;--accent-ink:#06202f;--ok:#1d3a28;--mid:#413618;--hi:#472422;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e171d;--surface:#16232c;--ink:#e6eef3;--muted:#93a6b3;--line:#2b3d49;--accent:#5bb0e6;--accent-ink:#06202f;--ok:#1d3a28;--mid:#413618;--hi:#472422;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3","Segoe UI",system-ui,sans-serif}
+h1,h2{font-family:Georgia,"Times New Roman",serif;margin:0}
+header{padding:20px 16px 8px;max-width:1000px;margin:0 auto}
+header h1{font-size:30px;color:var(--accent)}
+header p{margin:4px 0 0;color:var(--muted);font-size:14px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line)}
+nav div{max-width:1000px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:8px 16px}
+nav button{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px}
+nav button[aria-selected=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+main{max-width:1000px;margin:0 auto;padding:16px}
+section{display:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+section.on{display:block}
+h2{font-size:21px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;font-size:13px;color:var(--muted);gap:3px}
+input[type=text],input[type=date],input[type=number],select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 8px;width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chk{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 14px;margin:6px 0 14px}
+.chk label{display:flex;gap:8px;align-items:center;padding:4px 0;font-size:15px}
+h3{font-size:15px;margin:16px 0 4px;color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+td select{width:70px}
+.tot td{font-weight:700;border-bottom:0}
+.sc{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.box{flex:1 1 220px;border:2px solid var(--ink);border-radius:8px;padding:12px}
+.box b{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.box .v{font-size:22px;font-weight:700;margin-top:4px;padding:4px 8px;border-radius:6px}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.bar{display:flex;gap:8px;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+.bar button{padding:9px 16px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:inherit;cursor:pointer}
+.bar button.g{background:transparent;color:var(--accent)}
+body{max-width:480px;margin:0 auto;box-shadow:0 0 0 1px var(--line);padding-bottom:80px;min-height:100vh}
+.bt{border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;min-height:36px;padding:0 10px;font:inherit;font-size:13px;cursor:pointer}
+dialog{max-width:440px;width:92%;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:16px;max-height:85vh;overflow:auto}dialog th{text-align:left;font-weight:600;width:45%;vertical-align:top;font-size:13px}dialog td{font-size:14px}dialog::backdrop{background:rgba(0,0,0,.5)}
+.stepbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);z-index:9}.stepbar button{min-width:96px;height:44px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;cursor:pointer}.stepbar button.g{background:transparent;color:var(--accent)}
+@media print{.stepbar{display:none}}
+.idbox{border:2px solid var(--accent);border-radius:8px;padding:12px;margin-bottom:14px}.idbox .note{margin-top:6px}input.bad{border-color:#c0392b}
+@media print{nav,.bar{display:none}section{display:block!important;break-inside:avoid;margin-bottom:12px}}
+</style>
+</head>
+<body>
+<header><h1>CRS NICRH</h1><p>Cytoreductive surgery (CRS) report app · data is stored on this phone</p></header>
+<nav><div id="tabs" role="tablist"></div></nav>
+<main id="main">
+
+<section data-t="Patient &amp; surgery">
+<h2>Patient and surgery data</h2>
+<div class="idbox"><div class="grid">
+<label class="f">Patient ID *<input type="text" id="pid" autocomplete="off"></label>
+<label class="f">National ID *<input type="text" id="nid" autocomplete="off"></label>
+<label class="f">Full name *<input type="text" id="pname" autocomplete="off"></label>
+</div><div class="note">Patient ID and National ID must be unique. A duplicate of either is rejected on submit.</div></div>
+<div class="grid">
+<label class="f">Hospital / institution<input type="text"></label>
+<label class="f">City, country<input type="text"></label>
+<label class="f">1st surgeon<input type="text"></label>
+<label class="f">Date of birth<input type="date"></label>
+<label class="f">Date of surgery<input type="date"></label>
+<label class="f">Procedure title<input type="text"></label>
+<label class="f">Type of tumor<select><option>--- Select ---</option><option>Colorectal</option><option>Appendix</option><option>Ovarian</option><option>Gastric</option><option>Mesothelioma</option><option>Pseudomyxoma</option><option>Other</option></select></label>
+<label class="f">Primary / recurrent<select><option>--- Select ---</option><option>Primary</option><option>Recurrent</option></select></label>
+<label class="f">Type of procedure<select><option>--- Select ---</option><option>Cytoreduction</option><option>Cytoreduction + HIPEC</option><option>Exploratory only</option></select></label>
+<label class="f">Markers<select><option>--- Select ---</option><option>CEA</option><option>CA 19-9</option><option>CA 125</option></select></label>
+<label class="f">Performance status (ECOG)<select><option>--- Select ---</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+</div>
+<h3>Previous treatment</h3>
+<div class="chk"><label><input type="checkbox">Neoadjuvant chemotherapy</label><label><input type="checkbox">Radiotherapy</label></div>
+<label class="f">Details of previous treatment<input type="text"></label>
+<h3>Suspected stage IV? Sites</h3>
+<div class="chk" data-list="Pleura,Lung,Skin,Extra-abdominal lymph nodes,Liver,Abdominal wall,Parenchyma,Spleen parenchyma"></div>
+<label class="f">Other sites<input type="text"></label>
+</section>
+
+<section data-t="Approach">
+<h2>Surgical approach and findings</h2>
+<div class="grid">
+<label class="f">Approach<select><option>--- Select ---</option><option>Laparotomy</option><option>Laparoscopy</option><option>Converted</option></select></label>
+<label class="f">Volume of ascites (ml)<input type="number" min="0"></label>
+</div>
+<div class="chk"><label><input type="checkbox">Adhesiolysis</label></div>
+<h3>Abdominal wall resection</h3>
+<div class="chk" data-list="Scar,Ports site,Rectus abdominis – right,Rectus abdominis – left,Posterior sheath,Other"></div>
+</section>
+
+<section data-t="PCI &amp; scores">
+<h2>Peritoneal Cancer Index (Sugarbaker)</h2>
+<p class="note">Lesion size score: 0 no tumor seen · 1 up to 0.5 cm · 2 up to 5.0 cm · 3 larger than 5.0 cm or confluence.</p>
+<div style="overflow-x:auto"><table id="pci"><thead><tr><th>Region</th><th>Pre</th><th>Pre n/e</th><th>Post</th><th>Post n/e</th></tr></thead><tbody></tbody></table></div>
+<div class="sc">
+<div class="box"><b>Completeness of cytoreduction</b><select id="cc"><option>--- Select ---</option><option>CC-0 (no residual)</option><option>CC-1 (&lt; 2.5 mm)</option><option>CC-2 (2.5 mm – 2.5 cm)</option><option>CC-3 (&gt; 2.5 cm)</option></select></div>
+<div class="box"><b>Aletti score (demo estimate)</b><div class="v" id="aletti">0 — Class 1 (Low)</div></div>
+</div>
+<p class="note">The Aletti value here is a simple demo count of the peritonectomy and resection items ticked on the other tabs, not a validated calculation. n/e = not explorable.</p>
+</section>
+
+<section data-t="HIPEC">
+<h2>HIPEC</h2>
+<div class="grid">
+<label class="f">Technique<select><option>--- Select ---</option><option>Open (coliseum)</option><option>Closed</option><option>Semi-open</option></select></label>
+<label class="f">Protocol<select><option>--- Select ---</option><option>Mitomycin C</option><option>Cisplatin</option><option>Oxaliplatin</option><option>Doxorubicin + cisplatin</option><option>Other</option></select></label>
+<label class="f">Duration (min)<input type="number" min="0"></label>
+<label class="f">Flow rate (ml/min)<input type="number" min="0"></label>
+<label class="f">Temperature (°C)<input type="number" step="0.1"></label>
+<label class="f">Particularities / problems<input type="text"></label>
+</div>
+<h3>If residual disease</h3>
+<div class="chk" data-list="Diffuse serosal,Mesenteric,Liver,Hepatic hilum,Pancreas,Supradiaphragmatic,Celiac axis"></div>
+<label class="f">Other location / size of residual disease<input type="text"></label>
+</section>
+
+<section data-t="Peritonectomy">
+<h2>Peritonectomy procedures</h2>
+<div class="chk score" data-list="Anterior-ventral parietal,Capsulectomy,Infracolic greater omentum,Ascending mesocolic peritonectomy,Bladder peritonectomy,Paracolic gutter,Falciform ligament resection,Supracolic omentectomy (gastroepiploic arcade preserved),Transverse mesocolic peritonectomy,Pouch of Douglas peritonectomy,Subphrenic,Round ligament resection,Supracolic omentectomy (arcade resected),Descending mesocolic peritonectomy,Pararectal peritonectomy,Foramen of Winslow,Skeletonization of left gastric vessels,Lesser omentectomy,Sigmoid mesocolic peritonectomy,Iliac fossa peritonectomy,Morrison’s pouch,Hepatoduodenal ligament,Subpyloric space peritonectomy,Mesenteric peritonectomy,Inguinal orifice peritonectomy,Ligament of Treitz region,Gastrosplenic ligament resection,Total pancreatic peritonectomy,Posterior pelvic peritoneum"></div>
+<label class="f">Other<input type="text"></label>
+</section>
+
+<section data-t="Visceral resections">
+<h2>Visceral resections</h2>
+<h3>Upper abdomen</h3>
+<div class="chk score" data-list="Liver – wedge resection,Liver – segmentectomy,Hepatectomy,Cholecystectomy,Distal pancreatectomy,Whipple,Splenectomy,Gastrectomy – wedge,Gastrectomy – distal,Gastrectomy – total,Duodenum resection"></div>
+<h3>Bowel</h3>
+<div class="chk score" data-list="Jejunum resection,Ileum resection,Appendectomy,Cecectomy,Right colectomy,Left colectomy,Transverse colectomy,Sigmoid colectomy,Total colectomy,Anterior resection (high rectum),Low anterior resection,Abdominoperineal resection"></div>
+<div class="grid">
+<label class="f">Number of anastomoses<select><option>0</option><option>1</option><option>2</option><option>3</option></select></label>
+<label class="f">Residual small bowel (cm)<input type="number" min="0"></label>
+<label class="f">Stoma<select><option>None</option><option>Temporary</option><option>Permanent</option></select></label>
+</div>
+<h3>Urogenital, diaphragm and other</h3>
+<div class="chk score" data-list="Kidney resection,Ureter resection,Bladder resection,Hysterectomy,Vaginectomy,Salpingo-oophorectomy,Prostatectomy,Seminal vesicle,Spermatic cord,Diaphragm tendinous portion,Diaphragm muscle resection"></div>
+<label class="f">Extra-abdominal resection<input type="text"></label>
+</section>
+
+<section data-t="Lymph nodes">
+<h2>Lymphadenectomy</h2>
+<h3>Pelvic</h3>
+<div class="chk" data-list="External iliac – right,External iliac – left,Internal iliac – right,Internal iliac – left,Obturator – right,Obturator – left,Common iliac – right,Common iliac – left"></div>
+<h3>Retroperitoneal</h3>
+<div class="chk" data-list="Paracaval,Interaortocaval,Retrocaval,Para-aortic,Epigastric vessels,Suprarenal,Coeliac axis,Superior mesenteric artery,Common bile duct,Common hepatic artery,Hepatic hilar,Greater omentum,Lesser omentum,Left gastric artery,Splenic hilum,Para-cardiac,Inguinal – right,Inguinal – left"></div>
+<h3>Supradiaphragmatic</h3>
+<div class="chk" data-list="Subxiphoid,Cardiophrenic angle – right,Cardiophrenic angle – left,Mediastinal,Cervical,Axillary"></div>
+</section>
+
+<section data-t="Occult spaces">
+<h2>Verification of occult spaces</h2>
+<h3>Natural occult peritoneal spaces</h3>
+<div class="chk" data-list="Superior paraduodenal recess,Inferior paraduodenal recess,Right subhepatic space,Superior recess of the lesser sac,Subpyloric space,Hepatocaval space/groove,Liver fissures"></div>
+<h3>Peritoneal tunnels</h3>
+<div class="chk" data-list="Inguinal canal (M),Canal of Nuck (F),Tunnel formed by the hepatic bridge,Foramen of Winslow"></div>
+<h3>Difficult sites to inspect</h3>
+<div class="chk" data-list="Splenic hilum,Posterior edge of the spleen,Ileocecal region,Sigmoid recess,Small bowel mesentery and folds,Omental attachment along the colon,Right psoas-caval groove,Previous surgical planes"></div>
+<label class="f">Others<input type="text"></label>
+</section>
+
+<section data-t="Other &amp; remarks">
+<h2>Other details and remarks</h2>
+<div class="grid">
+<label class="f">Duration of surgery (min)<input type="number" min="0"></label>
+<label class="f">Drains (number)<input type="number" min="0"></label>
+<label class="f">Drain location<select><option>--- Select ---</option><option>Pelvis</option><option>Subphrenic right</option><option>Subphrenic left</option><option>Subhepatic</option></select></label>
+<label class="f">RBC units transfused<input type="number" min="0"></label>
+<label class="f">Estimated blood loss (cc)<input type="number" min="0"></label>
+</div>
+<label class="f" style="margin-top:12px">Severe complications during the operation<textarea rows="2"></textarea></label>
+<label class="f" style="margin-top:12px">Remarks<textarea rows="4"></textarea></label>
+<div class="bar"><button class="g" onclick="window.print()">Print report</button><button id="sub" onclick="submitRec()">Submit and add to Excel</button></div>
+<p class="note" id="smsg" role="status"></p>
+</section>
+<section data-t="Records"><h2>Saved patients</h2><p class="note" id="storeinfo"></p>
+<div style="overflow-x:auto"><table id="rt"><thead><tr><th>Patient ID</th><th>National ID</th><th>Name</th><th>Surgery date</th><th>Tumor type</th><th></th></tr></thead><tbody></tbody></table></div>
+<div class="bar"><span></span><button onclick="exportXlsx()">Download Excel (all patients)</button></div><p class="note" id="xmsg" role="status"></p></section>
+<dialog id="dlg"><div id="dbody"></div><div class="bar"><button class="g" onclick="document.getElementById('dlg').close()">Close</button><button id="dpdf">Download PDF</button></div></dialog>
+<div class="stepbar"><button class="g" id="prev">Back</button><span id="stp" class="note"></span><button id="next">Next</button></div>
+</main>
+<script src="./xlsx.full.min.js"></script>
+<script src="./jspdf.umd.min.js"></script>
+<script>
+/* Phone shim: no cloud database; data stays on the device. Exports go to the Android share sheet. */
+window.claude={use:async function(n){
+ if(n!=="downloads")return null;
+ return {save:async function(o){
+  var u8=o.data instanceof Uint8Array?o.data:new Uint8Array(o.data),bin="";
+  for(var i=0;i<u8.length;i+=8192)bin+=String.fromCharCode.apply(null,u8.subarray(i,i+8192));
+  var b64=btoa(bin),C=window.Capacitor,P=C&&C.Plugins;
+  if(C&&C.isNativePlatform&&C.isNativePlatform()&&P&&P.Filesystem&&P.Share){
+   var r=await P.Filesystem.writeFile({path:o.filename,data:b64,directory:"CACHE"});
+   await P.Share.share({title:o.filename,url:r.uri,dialogTitle:"Save or send "+o.filename});
+  }else{
+   var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([u8]));a.download=o.filename;document.body.appendChild(a);a.click();a.remove();
+  }
+ }};
+}};
+</script>
+
+<script>
+var secs=[].slice.call(document.querySelectorAll("section")),tabs=document.getElementById("tabs");
+function show(i){secs.forEach(function(s,j){s.classList.toggle("on",i===j)});[].forEach.call(tabs.children,function(b,j){b.setAttribute("aria-selected",i===j)});window.scrollTo(0,0);cur=i;var sp=document.getElementById("stp");if(sp)sp.textContent=(i+1)+" / "+secs.length;var tb=tabs.children[i];if(tb&&tb.scrollIntoView)tb.scrollIntoView({inline:"center",block:"nearest"})}
+var cur=0;
+secs.forEach(function(s,i){var b=document.createElement("button");b.innerHTML=s.dataset.t;b.setAttribute("role","tab");b.onclick=function(){show(i)};tabs.appendChild(b)});
+document.querySelectorAll("[data-list]").forEach(function(d){d.innerHTML=d.dataset.list.split(",").map(function(t){return '<label><input type="checkbox">'+t+'</label>'}).join("")});
+var R=["Central","Right upper quadrant","Epigastrium","Left upper quadrant","Left flank","Left lower quadrant","Pelvis","Right lower quadrant","Right flank","Upper jejunum","Lower jejunum","Upper ileum","Lower ileum"],tb=document.querySelector("#pci tbody");
+function sel(c){return '<select class="'+c+'"><option>0</option><option>1</option><option>2</option><option>3</option></select>'}
+R.forEach(function(r,i){var tr=document.createElement("tr");tr.innerHTML='<td>'+i+' – '+r+'</td><td>'+sel("pre")+'</td><td><input type="checkbox" class="pre-n"></td><td>'+sel("post")+'</td><td><input type="checkbox" class="post-n"></td>';tb.appendChild(tr)});
+var t=document.createElement("tr");t.className="tot";t.innerHTML='<td>PCI score</td><td id="t-pre">0 / 39</td><td></td><td id="t-post">0 / 39</td><td></td>';tb.appendChild(t);
+function pci(k){var s=0;document.querySelectorAll("select."+k).forEach(function(e){var n=e.closest("tr").querySelector("."+k+"-n");e.disabled=n.checked;if(n.checked)e.value=0;s+=+e.value});document.getElementById("t-"+k).textContent=s+" / 39"}
+function aletti(){var n=document.querySelectorAll(".score input:checked").length,v=document.getElementById("aletti");
+var c=n<=3?["Class 1 (Low)","var(--ok)"]:n<=7?["Class 2 (Intermediate)","var(--mid)"]:["Class 3 (High)","var(--hi)"];v.textContent=n+" — "+c[0];v.style.background=c[1]}
+document.getElementById("main").addEventListener("change",function(){pci("pre");pci("post");aletti()});
+pci("pre");pci("post");aletti();show(0);
+var recs={},store=null,useDb=false,$=function(i){return document.getElementById(i)};
+function say(t){$("smsg").textContent=t;$("xmsg").textContent=t}
+function lsGet(){try{return JSON.parse(localStorage.getItem("crs_recs")||"{}")}catch(e){return {}}}
+function lsSet(){try{localStorage.setItem("crs_recs",JSON.stringify(recs))}catch(e){}}
+recs=lsGet();
+(async function(){try{var db=await claude.use("db");if(!db){renderRecs();return}store=db.collection("patients");useDb=true;store.onSnapshot(function(s){recs={};s.docs.forEach(function(d){var x=d.data();if(x&&x._key)recs[x._key]=x});renderRecs()},function(){useDb=false;renderRecs()})}catch(e){renderRecs()}})();
+function renderRecs(){var b=document.querySelector("#rt tbody");b.textContent="";var k=Object.keys(recs);k.forEach(function(key){var r=recs[key],tr=document.createElement("tr");["Patient ID","National ID","Full name","Patient & surgery / Date of surgery","Patient & surgery / Type of tumor"].forEach(function(c){var td=document.createElement("td");td.textContent=r[c]||"";tr.appendChild(td)});var ta=document.createElement("td");ta.style.whiteSpace="nowrap";ta.innerHTML='<button class="bt" data-k="'+key+'" data-a="v">View</button> <button class="bt" data-k="'+key+'" data-a="p">PDF</button>';tr.appendChild(ta);b.appendChild(tr)});
+$("storeinfo").textContent=k.length+" patient(s) saved "+(useDb?"in the shared database.":"in this browser only.")}
+document.getElementById("prev").onclick=function(){show(Math.max(0,cur-1))};document.getElementById("next").onclick=function(){show(Math.min(secs.length-1,cur+1))};
+function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function recRows(r){return Object.keys(r).filter(function(k){return k!=="_key"&&String(r[k])!==""})}
+function viewRec(key){var r=recs[key];if(!r)return;var h="";recRows(r).forEach(function(k){h+="<tr><th>"+esc(k)+"</th><td>"+esc(String(r[k]))+"</td></tr>"});$("dbody").innerHTML="<h2>"+esc(String(r["Full name"]))+"</h2><table>"+h+"</table>";$("dpdf").onclick=function(){pdfRec(key)};var d=$("dlg");if(d.showModal)d.showModal();else d.setAttribute("open","")}
+async function pdfRec(key){var r=recs[key];if(!r)return;var L=function(s){return String(s).replace(/[–—]/g,"-").replace(/[’‘]/g,"'").replace(/[^\x20-\xFF]/g,"?")};
+try{var J=window.jspdf.jsPDF,d=new J({unit:"pt",format:"a4"}),y=50;d.setFontSize(18);d.text("CRS NICRH - CRS Report",40,y);y+=26;
+recRows(r).forEach(function(k){var l=d.splitTextToSize(L(k)+": "+L(r[k]),515);if(y+l.length*13>800){d.addPage();y=50}d.setFontSize(10);d.text(l,40,y);y+=l.length*13+4});
+var dl=await claude.use("downloads");await dl.save({filename:"CRS_"+key+".pdf",data:d.output("arraybuffer")});say("PDF ready.")}catch(e){say("PDF could not be saved.")}}
+$("rt").addEventListener("click",function(e){var b=e.target.closest("button[data-k]");if(!b)return;if(b.dataset.a==="p")pdfRec(b.dataset.k);else viewRec(b.dataset.k)});
+function sanitize(s){return s.trim().replace(/[^A-Za-z0-9_-]/g,"_")}
+function collect(){var o={};function put(k,v){var n=k,i=2;while(n in o){n=k+" ("+(i++)+")"}o[n]=v}
+put("Patient ID",$("pid").value.trim());put("National ID",$("nid").value.trim());put("Full name",$("pname").value.trim());put("Submitted at",new Date().toLocaleString());
+secs.forEach(function(s){var T=s.dataset.t;if(T==="Records")return;
+s.querySelectorAll("label.f,.chk,#pci,#cc").forEach(function(e){
+if(e.closest(".idbox"))return;
+if(e.id==="cc"){put("Completeness of cytoreduction",e.value.indexOf("---")===0?"":e.value);return}
+if(e.id==="pci"){e.querySelectorAll("tbody tr:not(.tot)").forEach(function(tr){var n=tr.cells[0].textContent,c=tr.querySelectorAll("select,input");put("PCI pre – "+n,c[1].checked?"n/e":c[0].value);put("PCI post – "+n,c[3].checked?"n/e":c[2].value)});put("PCI pre total",$("t-pre").textContent);put("PCI post total",$("t-post").textContent);put("Aletti (demo)",$("aletti").textContent);return}
+if(e.classList.contains("chk")){var h=e.previousElementSibling;while(h&&h.tagName!=="H3")h=h.previousElementSibling;var items=[].filter.call(e.querySelectorAll("input:checked"),function(){return true}).map(function(i){return i.parentNode.textContent.trim()});put(T+" / "+(h?h.textContent:"Items"),items.join("; "));return}
+var el=e.querySelector("input,select,textarea");if(!el)return;var v=el.value;if(v.indexOf("---")===0)v="";put(T+" / "+e.firstChild.textContent.trim(),v)})});
+return o}
+function resetForm(){document.querySelectorAll("main input,main select,main textarea").forEach(function(e){if(e.type==="checkbox")e.checked=false;else if(e.tagName==="SELECT")e.selectedIndex=0;else e.value=""});pci("pre");pci("post");aletti()}
+async function submitRec(){var p=$("pid"),n=$("nid"),m=$("pname");[p,n,m].forEach(function(e){e.classList.toggle("bad",!e.value.trim())});
+if(!p.value.trim()||!n.value.trim()||!m.value.trim()){show(0);say("Enter Patient ID, National ID and Full name before submitting.");p.focus();return}
+var key=sanitize(p.value),nat=n.value.trim().toLowerCase();
+if(recs[key]){show(0);p.classList.add("bad");say("Patient ID "+p.value.trim()+" already exists. Use a different ID.");return}
+for(var k in recs){if(String(recs[k]["National ID"]).toLowerCase()===nat){show(0);n.classList.add("bad");say("National ID already belongs to patient "+recs[k]["Patient ID"]+" ("+recs[k]["Full name"]+").");return}}
+var rec=collect();rec._key=key;
+if(useDb){try{await store.doc(key).set(rec)}catch(e){useDb=false}}
+recs[key]=rec;if(!useDb)lsSet();renderRecs();
+await exportXlsx();resetForm();show(0);
+}
+async function exportXlsx(){var rows=Object.keys(recs).map(function(k){var r=Object.assign({},recs[k]);delete r._key;return r});
+if(!rows.length){say("No patients saved yet.");return}
+var cols=[];rows.forEach(function(r){Object.keys(r).forEach(function(c){if(cols.indexOf(c)<0)cols.push(c)})});
+var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows,{header:cols}),"CRS Reports");
+var buf=XLSX.write(wb,{type:"array",bookType:"xlsx"}),d=null;
+try{d=await claude.use("downloads")}catch(e){}
+if(!d){say("Saved. Excel download is not available in this view.");return}
+try{await d.save({filename:"crs-reports.xlsx",data:buf});say("Saved. Excel file now holds "+rows.length+" patient(s).")}catch(e){say(e&&e.code==="declined"?"Saved. Excel download was declined; use Download Excel on the Records tab.":"Saved, but the Excel download failed.")}}
+</script>
+</body>
+</html>
